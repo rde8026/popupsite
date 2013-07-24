@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="row-fluid">
+        <div class="span6">
+            <form class="form-horizontal" id="product-create-form" method="post" enctype="multipart/form-data" action="/products/create/async">
+                <!--<input type="text" id="productArtisanId" name="productArtisanId" class="show">-->
+                <div class="control-group">
+                    <label class="control-label" for="name">Name</label>
+                    <div class="controls">
+                        <input type="text" name="name" id="name" placeholder="name" required>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="desc">Description</label>
+                    <div class="controls">
+                        <textarea rows="5" cols="10" id="desc" name="desc"  required></textarea>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="price">Price</label>
+                    <div class="controls">
+                        <input type="text" name="price" id="price" placeholder="price">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <input type="button" id="subForm" class="btn btn-primary" value="Add Product">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="span4">
+            <form id="fileupload" action="/images/temp/image" method="POST" enctype="multipart/form-data">
+                <div class="fileupload-buttonbar">
+                    <div style="padding-bottom: 22px; padding-top: 10px;">
+                        <img class="thumbnail" id="productThumbnailImg" src="img/140_placeholder.png" alt="Product Thumbnail" style="width: 140px; height: 140px;"/>
+                    </div>
+                    <span class="btn btn-success fileinput-button" style="margin-left: -10px;">
+                        <i class="icon-plus icon-white"></i>
+                        <span>Product Thumbnail</span>
+                        <input type="file" name="files[]">
+                    </span>
+                </div>
+                <div class="span5 fileupload-progress fade">
+                    <!-- The global progress bar -->
+                    <div id="progress" class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                        <div class="bar" style="width:0%;"></div>
+                    </div>
+                    <!-- The extended global progress information -->
+                    <div class="progress-extended">&nbsp;</div>
+                </div>
+            </form>
+        </div>
+        <div class="span4">
+            <form id="fileupload1" action="/images/temp/image" method="POST" enctype="multipart/form-data">
+                <div class="fileupload-buttonbar">
+                    <div style="padding-bottom: 22px; padding-top: 10px;">
+                        <img class="thumbnail" id="productFeatureImg" src="img/140_placeholder.png" alt="Product Feature" style="width: 140px; height: 140px;"/>
+                    </div>
+                    <span class="btn btn-success fileinput-button" >
+                        <i class="icon-plus icon-white"></i>
+                        <span>Product Feature</span>
+                        <input type="file" name="files[]">
+                    </span>
+                </div>
+                <div class="span5 fileupload-progress fade">
+                    <!-- The global progress bar -->
+                    <div id="progress1" class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                        <div class="bar" style="width:0%;"></div>
+                    </div>
+                    <!-- The extended global progress information -->
+                    <div class="progress-extended">&nbsp;</div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

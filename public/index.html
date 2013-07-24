@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ngView">
+<head>
+    <title>Popup Shop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        }
+    </style>
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <!--<link href="css/jquery.fileupload-ui-noscript.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="css/bootstrap-img-gallery.min.css">
+    <link href="css/jquery.fileupload-ui.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body ng-controller="AppCntl">
+<!-- ========== Header Nav ========= -->
+<div class="navbar navbar navbar-fixed-top" style="z-index: 10;" ng-controller="HeaderCntl">
+    <div class="navbar-inner">
+        <div class="container">
+            <!--<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>-->
+            <a class="brand" href="#/shops">Popup Shop</a>
+
+            <div class="nav-collapse collapse">
+
+                <ul class="nav">
+                    <li ng-class="{active:isActive('/shops')}">
+                        <a href="#/shops" id="navShopHref">Browse Popup Shop</a>
+                    </li>
+                </ul>
+
+                <ul class="nav pull-right">
+
+                    <li class="search-popups" id="search-popups">
+                        <form class="navbar-form pull-right" action='#/shops/search'>
+                            <input type="text" placeholder='Boston, MA or Britt Ryan'>
+                            <button type="submit" class="btn" id="navSearchShopsButton">Search</button>
+                        </form>
+                    </li>
+
+                    <li class="login-menu" id="navLoginMenu">
+                        <a ng-controller="AccessCntl" ng-click="showLoginModal()" id="navLoginHref">Sign In</a>
+                    </li>
+
+                    <li class="login-menu" id="navCreateUserMenu">
+                        <a id="navCreateUserHref" href="#/user/new">Create User</a>
+                    </li>
+
+                    <li class="account-menu" id="navAccountMenu">
+                        <a href="account" id="navAccountHref" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
+                        <ul class="dropdown-menu" id="account-dropdown">
+                            <li id="userProfile"><a id="navUserUpdateHref" href="#/user/update">User Profile</a></li>
+                            <li id="artisanProfile"> <a id="navArtisanProfileHref" href="#/profile/artisan">Artisan Profile</a></li>
+                            <li id="manageProducts"> <a href="#/profile/artisan/products">Manage Products</a></li>
+                            <li id="merchantProfile"> <a href="#/profile/merchant">Merchant Profile</a></li>
+                            <li id="merchantLocations"> <a href="#/profile/merchant/location">Merchant Locations</a></li>
+                            <li id="accountLogout"> <a ng-controller="AccessCntl" ng-click="logUserOut()">Sign Out</a> </li>
+                        </ul>
+                    </li>
+
+                    <li class="loading-menu hide" id="loadingMenu">
+                        <div style="padding-top: 5px;">
+                            <img src="img/loading.gif" height="30px" width="30px">
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ========== Header Nav ========= -->
+
+<!-- ========== Alerts ========= -->
+<div id="alert-error" class="alert alert-error alert-width fade in alert-style hide">
+    <a class="close" data-dismiss="alert">&times;</a>
+    <strong>Error!</strong> <p id="alert-error-text"></p>
+</div>
+<div id="alert-success" class="alert alert-width alert-success hide">
+    <a class="close" data-dismiss="alert">&times;</a>
+    <strong>Success!</strong> <p id="alert-info-text"></p>
+</div>
+
+<!-- ========== Alerts ========= -->
+
+<div ng-view>
+</div>
+<script src="https://checkout.stripe.com/v2/checkout.js"></script>
+<script src="lib/jquery-1.9.0.min.js"></script>
+
+<script src="lib/bootstrap.min.js"></script>
+
+<script src="js/angular/lib/angular.min.js"></script>
+<script src="js/angular/lib/angular-resource.min.js"></script>
+<script src="js/angular/lib/angular-ui.js"></script>
+<script src="js/angular/lib/ui-bootstrap-tpls-0.1.0-SNAPSHOT.js"></script>
+<script src="js/angular/js/popupshop.js"></script>
+<script src="js/angular/js/controllers.js"></script>
+<script src="js/angular/js/services.js"></script>
+
+<script src="js/angular/lib/jquery.colorbox-min.js"></script>
+
+<script src="lib/vendor/jquery.ui.widget.js"></script>
+<script src="lib/jquery.iframe-transport.js"></script>
+<script src="lib/jquery.fileupload.js"></script>
+
+
+
+<script src="lib/vendor/jquery.validate.min.js"></script>
+<script src="lib/jquery.form.js"></script>
+<script src="js/angular/lib/underscore.min.js"></script>
+
+
+<!-- ========== Modal Sign in ========= -->
+<div class="modal hide fade" id="modalLogin" data-backdrop="static" data-keyboard="false">
+    <div class="modal-header">
+        <h3>Please Sign In</h3>
+    </div>
+    <div class="modal-body">
+        <div id="login-alert-error" class="alert alert-error fade in alert-style hide" style="max-width: 300px;">
+            <a class="close" data-dismiss="alert">&times;</a>
+            <strong>Error!</strong> <p>Incorrect email or password.</p>
+        </div>
+        <form class="form-horizontal" name="login-form" id="login-form">
+            <div class="control-group">
+                <label class="control-label" for="email">Username</label>
+                <div class="controls">
+                    <input type="email" ng-model="email" name="email" id="email" placeholder="email / username" autofocus>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="password">Password</label>
+                <div class="controls" ng-controller="AccessCntl">
+                    <input type="password" ng-model="password" ui-keypress="{enter:'passwordEnter($event)'}" name="password" id="password" placeholder="password">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a ng-controller="AccessCntl" ng-click="showShops()" id="modalShowShops" class="btn pull-left">Browse Popups</a>
+        <a ng-controller="AccessCntl" ng-click="createUser()" class="btn">Create Account</a>
+        <a ng-controller="AccessCntl" ng-click="logUserIn()" class="btn btn-primary">Sign In</a>
+    </div>
+</div>
+<div class="modal hide fade" id="modalInteraction" data-keyboard="false">
+    <div class="modal-body">
+        <h6 style="text-align: center;">Working...</h6>
+        <div class="progress progress-striped active" style="margin-top: 12px;">
+            <div class="bar" style="width: 100%;"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

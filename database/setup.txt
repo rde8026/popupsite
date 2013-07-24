@@ -1,0 +1,11 @@
+create database inventory;
+
+create user 'inventory'@'localhost' identified by 'inventory_mgt';
+
+grant all privileges on inventory.* to 'inventory'@'localhost' with grant option;
+
+select password('inventory_mgt');
+
+update user set password = PASSWORD('inventory_mgt') where user = 'inventory';
+
+commit;

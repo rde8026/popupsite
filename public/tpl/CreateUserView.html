@@ -1,0 +1,44 @@
+<form class="form-horizontal form-signin" name="signup-form" id="signup-form" method="POST" action="/users/create">
+
+    <div class="control-group">
+        <label class="control-label" for="email">Username</label>
+        <div class="controls">
+            <input type="text" name="email" id="email" class="input-block-level required email" placeholder="email / username" >
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="firstName">First Name</label>
+        <div class="controls">
+            <input type="text" name="firstName" id="firstName" class="input-block-level required" placeholder="first name">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="firstName">Last Name</label>
+        <div class="controls">
+            <input type="text" name="lastName" id="lastName" class="input-block-level required" placeholder="last name">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="firstName">Password</label>
+        <div class="controls">
+            <input type="password" name="password" id="password" class="input-block-level required" minlength="6" placeholder="password">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="firstName">Confirm Password</label>
+        <div class="controls">
+            <input type="password" name="confirm" id="confirm" class="input-block-level required" minlength="6" placeholder="confirm password">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+            <button class="btn btn-primary" type="button" id="createUser">Create Account</button>
+            <a href="login" id="createUserNavToLogin" class="btn btn-secondary">Back</a>
+        </div>
+    </div>
+</form>

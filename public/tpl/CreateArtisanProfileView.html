@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="row-fluid">
+        <div class="span6">
+            <form class="form-horizontal profile-form" id="artisan-profile-form" method="post" enctype="multipart/form-data" action="/profile/artisan">
+                <div class="control-group">
+                    <label class="control-label" for="companyName">Company Name</label>
+                    <div class="controls">
+                        <input type="text" id="companyName" name="companyName" value="<%= companyName %>" placeholder="company name" required>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="website">Company Name</label>
+                    <div class="controls">
+                        <input type="text" id="website" name="website" placeholder="website" value="<%= website %>" type="text">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="story">Story</label>
+                    <div class="controls">
+                        <textarea rows="5" cols="10" id="story" name="story" type="text" required><%= story %></textarea>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="classification">Classification</label>
+                    <div class="controls">
+                        <select id="classification" name="classification">
+                            <option>Class 1</option>
+                            <option>Class 2</option>
+                            <option>Class 3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="button" class="btn btn-primary" id="createArtisanProfileBtn">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="span4">
+            <form id="fileupload" action="/images/temp/image" method="POST" enctype="multipart/form-data">
+                <div class="fileupload-buttonbar">
+                    <div style="margin-left: -8px; padding-bottom: 22px; padding-top: 10px;">
+                        <!--<img class="thumbnail" id="artisanProfilePhotoTemp" src="img/140_placeholder.png" alt="profileimage" style="width: 140px; height: 140px;"/>-->
+                        <img class="thumbnail" id="artisanProfilePhotoTemp" src="<%= profileImageUrl === null ? 'img/140_placeholder.png' : profileImageUrl %>" alt="profileimage" style="width: 140px; height: 140px;"/>
+                    </div>
+                    <span class="btn btn-success fileinput-button">
+                        <i class="icon-plus icon-white"></i>
+                        <span>Profile Photo</span>
+                        <input type="file" name="files[]">
+                    </span>
+                </div>
+                <div class="span5 fileupload-progress fade">
+                    <!-- The global progress bar -->
+                    <div id="progress" class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                        <div class="bar" style="width:0%;"></div>
+                    </div>
+                    <!-- The extended global progress information -->
+                    <div class="progress-extended">&nbsp;</div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

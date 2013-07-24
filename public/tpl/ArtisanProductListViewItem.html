@@ -1,0 +1,11 @@
+<div class="thumbnail">
+    <img src="<%= thumbnailImage === null ? 'img/140_placeholder.png' : thumbnailImage %>" height="150" width="125" alt="" style="text-align: center;">
+    <div class="caption">
+        <h3><%= name %></h3>
+        <p><%= description %></p>
+        <p>
+            <a href="#" class="btn btn-primary">Delete</a>
+            <a href="#artisan/products/edit/<%= id %>" class="btn btn-secondary">Update</a>
+        </p>
+    </div>
+</div>

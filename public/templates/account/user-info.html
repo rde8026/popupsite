@@ -1,0 +1,44 @@
+<form class="form-horizontal form-signin" name="signup-form" id="signup-form">
+    <input type="text" ng-model="user.id" name="id" id="id" style="display: none;">
+    <div class="control-group">
+        <label class="control-label" for="email">Username</label>
+        <div class="controls">
+            <input type="email" ng-model="user.email" name="email" id="email" class="input-block-level" placeholder="email / username" required>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="firstName">First Name</label>
+        <div class="controls">
+            <input type="text" ng-model="user.firstName" name="firstName" id="firstName" class="input-block-level required" placeholder="first name">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="lastName">Last Name</label>
+        <div class="controls">
+            <input type="text" ng-model="user.lastName" name="lastName" id="lastName" class="input-block-level required" placeholder="last name">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="password">Password</label>
+        <div class="controls">
+            <input type="password" ng-model="user.password" name="password" id="password" class="input-block-level required" minlength="6" placeholder="password">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="confirm">Confirm Password</label>
+        <div class="controls">
+            <input type="password" ng-model="user.confirm" name="confirm" id="confirm" class="input-block-level required" minlength="6" placeholder="confirm password">
+
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+            <button class="btn btn-primary" type="button" id="createUser" ng-click="createUser()">Save User</button>
+        </div>
+    </div>
+</form>

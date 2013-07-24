@@ -1,0 +1,33 @@
+<div class="home-hero">
+    <h1>Login to Popup Shop</h1>
+    <h3>Please login!</h3>
+
+    <br/>
+    <form class="form-horizontal form-signin" name="login-form" id="login-form" method="POST" action="/users/login">
+        <div class="control-group">
+            <label class="control-label" for="email">Username</label>
+            <div class="controls">
+                <input type="text" name="email" id="email" class="input-block-level required email" placeholder="email / username">
+                <!--<span class="field-validation-valid" data-valmsg-for="email" data-valmsg-replace="true"></span>-->
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="password">Password</label>
+            <div class="controls">
+                <input type="password" name="password" id="password" class="input-block-level required" placeholder="password">
+                <!--<span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>-->
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <label class="checkbox">
+                    <input type="checkbox"> Remember me
+                </label>
+                <button id="loginBtn" class="btn btn-primary" type="button" >Sign In</button>
+                <a href="/users/new" id="loginCreateUserNavHref" class="btn btn-secondary">Create Account</a>
+            </div>
+        </div>
+    </form>
+</div>

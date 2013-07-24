@@ -1,0 +1,141 @@
+<style>
+    table { table-layout: fixed; }
+    table th, table td { overflow: hidden; }
+</style>
+
+<div class="container span12">
+    <div class="row-fluid">
+        <div class="span4">
+            <form class="form-horizontal" id="product-create-form" method="post" enctype="multipart/form-data" action="/products/create/async">
+                <input type="text" ng-model="product.id" id="id" name="id" value="{{product.id}}" style="display: none;">
+                <div class="control-group">
+                    <label class="control-label" for="name">Name</label>
+                    <div class="controls">
+                        <input type="text" ng-model="product.name" name="name" id="name" placeholder="name" required>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="desc">Description</label>
+                    <div class="controls">
+                        <textarea rows="5" ng-model="product.description" cols="10" id="desc" name="desc"  required></textarea>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="price">Price</label>
+                    <div class="controls">
+                        <input type="text" ng-model="product.price" name="price" id="price" placeholder="price">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <input type="button" ng-click="clearProduct()" id="clearForm" class="btn" value="Clear">
+                        <input type="button" ng-click="saveProduct()" id="subForm" class="btn btn-primary" value="Save Product">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="span1"></div>
+        <div class="span2">
+            <form id="fileuploadThumbnail" action="/images/temp/image" method="POST" enctype="multipart/form-data">
+                <div class="fileupload-buttonbar">
+                    <div style="padding-bottom: 22px; padding-top: 10px;">
+                        <img class="thumbnail" id="productThumbnailImg" ng-src="{{product.thumbnailImage || 'img/140_placeholder.png'}}" alt="Product Thumbnail" style="width: 140px; height: 140px;"/>
+                    </div>
+                    <span class="btn btn-success fileinput-button" style="margin-left: -10px;">
+                        <i class="icon-plus icon-white"></i>
+                        <span>Product Thumbnail</span>
+                        <input type="file" name="files[]">
+                    </span>
+                </div>
+                <div class="span5 fileupload-progress fade">
+                    <!-- The global progress bar -->
+                    <div id="progress" class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                        <div class="bar" style="width:0%;"></div>
+                    </div>
+                    <!-- The extended global progress information -->
+                    <div class="progress-extended">&nbsp;</div>
+                </div>
+            </form>
+        </div>
+        <div class="span2">
+            <form id="fileuploadFeature" action="/images/temp/image" method="POST" enctype="multipart/form-data">
+                <div class="fileupload-buttonbar">
+                    <div style="padding-bottom: 22px; padding-top: 10px;">
+                        <img class="thumbnail" id="productFeatureImg" ng-src="{{product.featureImage || 'img/140_placeholder.png'}}" alt="Product Feature" style="width: 140px; height: 140px;"/>
+                    </div>
+                    <span class="btn btn-success fileinput-button" >
+                        <i class="icon-plus icon-white"></i>
+                        <span>Product Feature</span>
+                        <input type="file" name="files[]">
+                    </span>
+                </div>
+                <div class="span5 fileupload-progress fade">
+                    <!-- The global progress bar -->
+                    <div id="progress1" class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                        <div class="bar" style="width:0%;"></div>
+                    </div>
+                    <!-- The extended global progress information -->
+                    <div class="progress-extended">&nbsp;</div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row-fluid span6" id="product-table">
+        <table class="table table-bordered table-striped" style="margin: 0 auto !important; float: none !important;">
+            <thead>
+                <tr>
+                    <th style="width: 10%;">&nbsp;</th>
+                    <th style="width: 25%;">Name</th>
+                    <th style="width: 40%;">Description</th>
+                    <th style="width: 10%;">Price</th>
+                    <th style="width: 15%;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="artisanProduct in artisanProducts">
+                    <td><img class="thumbnail" ng-src="{{artisanProduct.thumbnailImage || 'img/140_placeholder.png'}}" height="20px" width="20px"/></td>
+                    <td style="text-overflow: ellipsis;">
+                        <p>{{artisanProduct.name}}</p>
+                    </td>
+                    <td style="text-overflow: ellipsis;">{{artisanProduct.description}}</td>
+                    <td>{{artisanProduct.price | currency:"USD$"}}</td>
+                    <td>
+                        <!--<a ng-click="deleteProduct(artisanProduct)" class="btn-small btn-danger">Delete</a>-->
+                        <a ng-click="deleteProductConfirm(artisanProduct)" class="btn-small btn-danger">Delete</a>
+                        <a ng-click="editProduct(artisanProduct)" class="btn-small btn-primary">Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="pagination pagination-centered" id="pagination">
+            <ul>
+                <li ng-class="{disabled: currentPageNumber == 0}">
+                    <a ng-click="paginatePrev()">Previous</a>
+                </li>
+                <li ng-repeat="page in pages" ng-class="{active: currentPageNumber == page.number}">
+                    <a ng-click="paginate(page.start, page.number)">{{page.number + 1}}</a>
+                </li>
+                <li ng-class="{active: currentPageNumber == lastPageNumber}">
+                    <a ng-click="paginateNext()">Next</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="modal hide fade" id="modalRemoveProduct" data-backdrop="static" data-keyboard="false">
+    <div class="modal-header">
+        <h3>Please Confirm</h3>
+    </div>
+    <div class="modal-body">
+        <p id="productDeleteInfo"></p>
+    </div>
+    <div class="modal-footer">
+        <a ng-click="deleteProductCancel()" id="removeArtisanConfirm" class="btn">Cancel</a>
+        <a ng-click="deleteProduct()" class="btn btn-danger">Delete</a>
+    </div>
+</div>

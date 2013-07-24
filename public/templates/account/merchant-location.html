@@ -1,0 +1,119 @@
+<style>
+    table { table-layout: fixed; }
+    table th, table td { overflow: hidden; }
+</style>
+
+
+<div class="row-fluid">
+    <div class="span4">
+        <form class="form-horizontal" id="merchant-location-form">
+            <input type="text" ng-model="merchantLocation.id" id="id" name="id" value="{{merchantLocation.id}}" style="display: none;">
+            <input type="text" ng-model="merchantLocation.locationImages" id="locationImages" name="locationImages" style="display: none;">
+            <div class="control-group">
+                <label class="control-label" for="locationName">Location Name</label>
+                <div class="controls">
+                    <input type="text" ng-model="merchantLocation.name" id="locationName" name="locationName" placeholder="location name" required>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="description">Description</label>
+                <div class="controls">
+                    <textarea ng-model="merchantLocation.description" rows="5" cols="10" id="description" name="description" type="text" placeholder="location description" required></textarea>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="address">Address</label>
+                <div class="controls">
+                    <input type="text" ng-model="merchantLocation.address" id="address" name="address" placeholder="address" required>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="address2">Address Cont</label>
+                <div class="controls">
+                    <input type="text" ng-model="merchantLocation.address2" id="address2" name="address2" placeholder="address cont">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="city">City</label>
+                <div class="controls">
+                    <input type="text" ng-model="merchantLocation.city" id="city" name="city" placeholder="city" required>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="state">State</label>
+                <div class="controls">
+                    <input type="text" ng-model="merchantLocation.state" id="state" name="state" placeholder="state" required>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="zip">Zip Code</label>
+                <div class="controls">
+                    <input type="text" ng-model="merchantLocation.zipCode" id="zip" name="zip" placeholder="zip" required>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="controls">
+                    <button type="button" ng-click="saveLocation()" class="btn btn-primary" id="createMerchantProfileBtn">Save</button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="span4">
+        <!--<div ng-include="imagePane"></div>-->
+        <ul class="nav nav-tabs">
+            <li ng-class="{active: tabName == 'images'}">
+                <a ng-click="tabClick('images')">Images</a>
+            </li>
+            <li ng-class="{active: tabName == 'features'}">
+                <a ng-click="tabClick('features')">Features</a>
+            </li>
+            <li ng-class="{active: tabName == 'rates'}">
+                <a ng-click="tabClick('rates')">Rates</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane" ng-class="{active: tabName == 'images'}">
+                <ul class="thumbnails" id="images">
+                    <form style="margin-left: 8px;" id="fileupload" action="/images/temp/image" method="POST" enctype="multipart/form-data">
+                        <div class="fileupload-buttonbar">
+                            <span class="btn btn-success fileinput-button">
+                                <i class="icon-plus icon-white"></i>
+                                <span>Add Photo</span>
+                                <input type="file" name="files[]">
+                            </span>
+                        </div>
+                    </form>
+                </ul>
+            </div>
+            <div class="tab-pane" ng-class="{active: tabName == 'features'}" id="features">
+                Blah
+            </div>
+            <div class="tab-pane" ng-class="{active: tabName == 'rates'}" id="rates">
+                <form class="form-horizontal" id="merchant-location-rate-form">
+                    <div class="control-group">
+                        <label class="control-label" for="dailyRate">Daily Rate</label>
+                        <div class="controls">
+                            <input type="text" ng-model="merchantLocation.dailyRate" id="dailyRate" name="dailyRate" placeholder="daily rate" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="hourlyRate">Hourly Rate</label>
+                        <div class="controls">
+                            <input type="text" ng-model="merchantLocation.hourlyRate" id="hourlyRate" name="hourlyRate" placeholder="hourly rate" required>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,123 @@
+<div class="container clearfix">
+    <div class="row-fluid">
+        <div class="span6">
+            <form class="form-horizontal profile-form" id="artisan-profile-form">
+                <input type="text" ng-model="artisan.id" id="id" name="id" value="{{artisan.id}}" style="display: none;">
+                <div class="control-group">
+                    <label class="control-label" for="companyName">Company Name</label>
+                    <div class="controls">
+                        <input type="text" ng-model="artisan.companyName" id="companyName" name="companyName" placeholder="company name" required>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="website">Website</label>
+                    <div class="controls">
+                        <input type="text" ng-model="artisan.website" id="website" name="website" placeholder="http://www.mySpot.com" type="text">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="location">Location</label>
+                    <div class="controls">
+                        <input type="text" ng-model="artisan.location" id="location" name="location" placeholder="boston, ma" type="text">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="story">Story</label>
+                    <div class="controls">
+                        <textarea ng-model="artisan.story" rows="5" cols="10" id="story" name="story" type="text" placeholder="my unique story" required></textarea>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="classification">Classification</label>
+                    <div class="controls">
+                        <select id="classification" name="classification" ng-model="artisan.classification">
+                            <option>Class 1</option>
+                            <option>Class 2</option>
+                            <option>Class 3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="button" ng-click="saveProfile()" class="btn btn-primary" id="createArtisanProfileBtn">Save</button>
+                        <button type="button" ng-click="showRemoveConfirm()" class="btn btn-danger" id="deleteArtisanProfileBtn">Delete</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="span4">
+            <form id="fileupload" action="/images/temp/image" method="POST" enctype="multipart/form-data">
+                <div class="fileupload-buttonbar">
+                    <div style="margin-left: -8px; padding-bottom: 22px; padding-top: 10px;">
+                        <img class="thumbnail" ng-src="{{artisan.profileImageUrl || 'img/140_placeholder.png'}}" id="artisanProfilePhotoTemp" alt="profileimage" style="width: 140px; height: 140px;"/>
+                    </div>
+                    <span class="btn btn-success fileinput-button">
+                        <i class="icon-plus icon-white"></i>
+                        <span>Profile Photo</span>
+                        <input type="file" name="files[]">
+                    </span>
+                </div>
+                <div class="span5 fileupload-progress fade">
+                    <!-- The global progress bar -->
+                    <div id="progress" class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                        <div class="bar" style="width:0%;"></div>
+                    </div>
+                    <!-- The extended global progress information -->
+                    <div class="progress-extended">&nbsp;</div>
+                </div>
+            </form>
+        </div>
+        <!-- ========= WORKING FOR STRIPE =========-->
+        <div class="span6" id="cardInfoSection">
+            <div style="padding-top: 8px;">
+                <div id="cardDetails">
+                    <img ng-src="{{cardTypeUrl}}" alt="cc" style="float: left"/>
+                    <p class="muted">**** {{stripeCustomer.active_card.last4}}</p>
+                    <p class="muted">{{stripeCustomer.active_card.name}}</p>
+                </div>
+                <br/>
+                <button type="button" class="btn btn-primary" id="createStripCustomerId">Save Credit Card</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- =========== STRIPE JS =========== -->
+<script>
+    $('#createStripCustomerId').click(function(){
+        var scope = angular.element('#createStripCustomerId').scope();
+        var token = function(res) {
+            /*console.log(res);
+            console.log('Got token ID:', res.id);*/
+            scope.addStripeCustomerId(res.id);
+        };
+
+        StripeCheckout.open({
+            key:         'pk_test_yb0pKj6OlNTE2o5qmeDYsjSy',
+            address:     true,
+            amount:      0,
+            name:        'Credit Card',
+            description: 'Add a credit car we can use to charge when you book a retail location!',
+            panelLabel:  'Save Card',
+            token:       token
+        });
+
+        return false;
+    });
+</script>
+<div class="modal hide fade" id="modalRemoveArtisan" data-backdrop="static" data-keyboard="false">
+    <div class="modal-header">
+        <h3>Please Confirm</h3>
+    </div>
+    <div class="modal-body">
+        <p>Are you sure you want to delete your Artisan Profile?</p>
+    </div>
+    <div class="modal-footer">
+        <a ng-click="removeConfirmModal()" id="removeArtisanConfirm" class="btn">Cancel</a>
+        <a ng-click="removeProfile()" id="confirmRemoveProfile" class="btn btn-danger">Delete</a>
+    </div>
+</div>

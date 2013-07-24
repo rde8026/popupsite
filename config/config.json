@@ -1,0 +1,61 @@
+{
+  "unit_test" :
+    {
+      "sqlLite" : false,
+      "username":"root",
+      "password":null,
+      "database":"inventory_unit_test",
+      "host":"127.0.0.1"
+      , "port" : 3306
+      , "httpPort" : 10101
+      , "drop_db" : true
+      , "logLevel" : "debug"
+    },
+  "development":
+    {
+        "username":"root"
+        , "password":null
+        , "database":"inventory"
+        , "host":"127.0.0.1"
+        , "port" : 3306
+        , "httpPort" : 3000
+        , "drop_db" : false
+        , "logLevel" : "debug"
+        , "sessionTimeout" : 10
+        , "cookieSecret" : "qweaywei1314402131"
+        , "urlPrefix" : "http://localhost:3000"
+        , "stripPublishableKey" : ""
+        , "stripeSecretKey" : ""
+        , "braintreeMerchantAccount" : ""
+        , "braintreePublicKey" : ""
+        , "braintreePrivateKey" : ""
+    },
+  "test":
+    {
+        "username":"root"
+        , "password":null
+        , "database":"database_test"
+        , "host":"127.0.0.1"
+        , "port" : 3306
+        , "httpPort" : 3000
+        , "drop_db" : false
+        , "urlPrefix" : "http://localhost:3000"
+        , "logLevel" : "warn"
+        , "sessionTimeout" : 10
+        , "cookieSecret" : "qweaywei1314402131"
+    },
+  "production":
+    {
+        "username":"root"
+        , "password":null
+        , "database":"inventory"
+        , "host":"127.0.0.1"
+        , "port" : 3306
+        , "httpPort" : 3000
+        , "drop_db" : false
+        , "urlPrefix" : "http://localhost:3000"
+        , "logLevel" : "error"
+        , "sessionTimeout" : 30
+        , "cookieSecret" : "zxsdfeerw947427104lasd921"
+    }
+}
