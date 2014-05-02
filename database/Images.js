@@ -166,7 +166,7 @@ function addImageToS3(filePath, entityId, entityType, folder, done) {
     //TODO: Figure out how to load the config from file
     //TODO: Figure out how to store a job and retry it.
 
-    aws.config.update({accessKeyId: 'AKIAIY6DWJJEV7HGKRAQ', secretAccessKey: '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', region : 'us-east-1'});
+    aws.config.update({accessKeyId: '', secretAccessKey: '', region : 'us-east-1'});
     var s3 = new aws.S3();
     var extension = filePath.substr(filePath.indexOf("."), filePath.length);
     var fName = uuid(10) + extension;
